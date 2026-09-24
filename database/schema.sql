@@ -1,0 +1,7 @@
+-- TODO: Implement the production MSSQL schema after the API contract is finalized.
+-- Tables: Users, Clients, Packages, Services, Projects.
+-- Projects will use foreign keys:
+--   Projects.ClientId  -> Clients.Id
+--   Projects.PackageId -> Packages.Id
+--   Projects.ServiceId -> Services.Id
+-- Add audit columns, indexes, constraints, and role-aware user fields during database implementation.
