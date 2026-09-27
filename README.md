@@ -98,7 +98,7 @@ Before running the project, install:
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/KurrinChi/EFX-Schedule-Tracker.git
 cd Schedule-Manager
 ```
 
@@ -131,8 +131,7 @@ Database scripts are located in:
 
 ```text
 database/
-├── schema.sql
-└── seed.sql
+└── Updated database Table.sql
 ```
 
 ## Environment Configuration
