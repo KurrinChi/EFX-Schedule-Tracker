@@ -27,7 +27,6 @@ export default function Charts({ projects }) {
     return () => observer.disconnect();
   }, []);
 
-  const textColor = isDark ? "#f5f5f5" : "#171717";
   const secondaryTextColor = isDark ? "#b8b8b8" : "#525252";
   const gridColor = isDark ? "#2a2a2a" : "#e2e5e9";
 

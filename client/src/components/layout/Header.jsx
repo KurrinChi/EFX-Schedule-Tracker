@@ -6,7 +6,7 @@ import {
   SearchOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 
 export default function Header({ onMobileMenu, onSearch }) {
   const { user, logout } = useAuth();

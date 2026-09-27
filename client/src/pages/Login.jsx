@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Alert, Button, Checkbox, Form, Input, Typography } from "antd";
+import { Alert, Button, Form, Input, Typography } from "antd";
 import {
   ArrowRightOutlined,
   LockOutlined,
   MailOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
   const { login } = useAuth();
@@ -83,10 +83,6 @@ export default function Login() {
                 placeholder="Enter your password"
               />
             </Form.Item>
-            <div className="form-options">
-              <Checkbox>Remember me</Checkbox>
-              <a href="#forgot">Forgot password?</a>
-            </div>
             <Button
               htmlType="submit"
               type="primary"
@@ -101,7 +97,7 @@ export default function Login() {
           <p className="auth-footer">
             Don't have an account? <Link to="/register">Create an account</Link>
           </p>
-          <div className="mock-note">
+          <div className="auth-note">
             SECURE SIGN-IN
             <br />
             Use your EFX workspace credentials.

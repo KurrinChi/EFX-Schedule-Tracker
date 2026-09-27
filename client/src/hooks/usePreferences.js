@@ -1,1 +1,6 @@
-export { usePreferences } from "../context/PreferenceContext";
+import { useContext } from "react";
+import { PreferenceContext } from "../context/preferenceContextValue";
+
+export function usePreferences() {
+  return useContext(PreferenceContext);
+}

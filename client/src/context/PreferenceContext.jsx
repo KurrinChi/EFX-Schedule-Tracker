@@ -1,8 +1,7 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { preferenceDefaults } from "../preferences/preferenceDefaults";
 import { preferenceService } from "../preferences/preferenceService";
-
-const PreferenceContext = createContext(null);
+import { PreferenceContext } from "./preferenceContextValue";
 
 export function PreferenceProvider({ children }) {
   const [preferences, setPreferences] = useState(() =>
@@ -30,8 +29,4 @@ export function PreferenceProvider({ children }) {
       {children}
     </PreferenceContext.Provider>
   );
-}
-
-export function usePreferences() {
-  return useContext(PreferenceContext);
 }

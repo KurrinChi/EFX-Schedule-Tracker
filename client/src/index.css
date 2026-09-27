@@ -178,18 +178,12 @@
 .form-alert {
   margin: 20px 0;
 }
-.form-options {
-  display: flex;
-  justify-content: space-between;
-  margin: -2px 0 22px;
-  font-size: 12px;
-}
 .auth-footer {
   text-align: center;
   margin-top: 24px;
   font-size: 13px;
 }
-.mock-note {
+.auth-note {
   color: #6e665d;
   border: 1px solid #2b251f;
   padding: 12px;
@@ -197,9 +191,6 @@
   line-height: 1.7;
   margin-top: 28px;
   letter-spacing: 0.06em;
-}
-.mock-note strong {
-  color: #a99d8e;
 }
 .mobile-brand {
   display: none;

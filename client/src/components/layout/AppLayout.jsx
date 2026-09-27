@@ -10,7 +10,6 @@ export default function AppLayout({
   children,
   onAddEntity,
   onReport,
-  search,
   setSearch,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);

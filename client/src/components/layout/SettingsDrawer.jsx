@@ -8,7 +8,7 @@ import {
   Tag,
   Typography,
 } from "antd";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import { usePreferences } from "../../hooks/usePreferences";
 import { apiConfig } from "../../config/apiConfig";
 import { appConfig } from "../../config/appConfig";

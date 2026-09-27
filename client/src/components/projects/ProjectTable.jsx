@@ -35,7 +35,6 @@ export default function ProjectTable({
   setStatus,
   payment,
   setPayment,
-  onView,
   onEdit,
   onDelete,
 }) {

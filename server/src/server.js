@@ -32,6 +32,19 @@ const allowedOrigins =
           "http://localhost:5174",
         ]),
       ];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    callback(new Error("CORS policy denied."));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -45,23 +58,9 @@ app.use(
   }),
 );
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-        return;
-      }
+app.use(cors(corsOptions));
 
-      callback(new Error("CORS policy denied."));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
-);
-
-app.options("*", cors());
+app.options("*", cors(corsOptions));
 
 app.use(express.json({ limit: "1mb" }));
 

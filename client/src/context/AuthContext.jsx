@@ -1,17 +1,17 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { authService } from "../services/authService";
-
-export const AuthContext = createContext(null);
+import { AuthContext } from "./authContextValue";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() =>
+    Boolean(sessionStorage.getItem("efx_auth_token")),
+  );
 
   useEffect(() => {
     const token = sessionStorage.getItem("efx_auth_token");
 
     if (!token) {
-      setLoading(false);
       return undefined;
     }
 
@@ -58,8 +58,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }

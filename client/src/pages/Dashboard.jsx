@@ -97,13 +97,13 @@ export default function Dashboard() {
   };
   if (loading)
     return (
-      <AppLayoutComponent search={search} setSearch={setSearch}>
+      <AppLayoutComponent setSearch={setSearch}>
         <LoadingState />
       </AppLayoutComponent>
     );
   if (error)
     return (
-      <AppLayoutComponent search={search} setSearch={setSearch}>
+      <AppLayoutComponent setSearch={setSearch}>
         <ErrorState message={error} />
       </AppLayoutComponent>
     );
@@ -113,7 +113,6 @@ export default function Dashboard() {
         type === "project" ? setFormOpen(true) : setEntity(type)
       }
       onReport={() => setReportOpen(true)}
-      search={search}
       setSearch={setSearch}
     >
       <PageHeader
@@ -132,7 +131,6 @@ export default function Dashboard() {
         setStatus={setStatus}
         payment={payment}
         setPayment={setPayment}
-        onView={(p) => message.info(`${p.projectType} for ${p.clientName}`)}
         onEdit={(p) => {
           setEditing(p);
           setFormOpen(true);

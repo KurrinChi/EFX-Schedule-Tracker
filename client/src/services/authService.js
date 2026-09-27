@@ -56,7 +56,7 @@ export const authService = {
   async logout() {
     try {
       await api.post("/auth/logout");
-    } catch (error) {
+    } catch {
       // Ignore backend logout failures; local session cleanup should still happen.
     }
 
