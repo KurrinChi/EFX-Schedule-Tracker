@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   Descriptions,
@@ -35,22 +35,67 @@ export default function ProjectTable({
   setStatus,
   payment,
   setPayment,
+  selectedProject,
+  onSelectedProjectHandled,
   onEdit,
   onDelete,
 }) {
   const [viewingProject, setViewingProject] = useState(null);
 
-  const filtered = projects.filter(
-    (p) =>
-      `${p.clientName} ${p.projectType} ${p.location}`
-        .toLowerCase()
-        .includes(search.toLowerCase()) &&
-      (!status || p.status === status) &&
-      (!payment || p.paymentStatus === payment),
-  );
+  /*
+   * ----------------------------------------------------------
+   * OPEN EXISTING DETAILS MODAL FROM HEADER SEARCH
+   * ----------------------------------------------------------
+   *
+   * The Header does NOT create another modal.
+   *
+   * Dashboard passes the selected project here and we simply
+   * put that project into the SAME viewingProject state that
+   * the normal table "View" button uses.
+   */
+  useEffect(() => {
+    if (!selectedProject) {
+      return;
+    }
 
+    setViewingProject(selectedProject);
+
+    if (typeof onSelectedProjectHandled === "function") {
+      onSelectedProjectHandled();
+    }
+  }, [selectedProject, onSelectedProjectHandled]);
+
+  /*
+   * ----------------------------------------------------------
+   * TABLE FILTERING
+   * ----------------------------------------------------------
+   *
+   * Existing table search now also includes packageName.
+   */
+  const filtered = projects.filter((p) => {
+    const searchableText = `
+      ${p.clientName || ""}
+      ${p.projectType || ""}
+      ${p.packageName || ""}
+      ${p.location || ""}
+    `.toLowerCase();
+
+    return (
+      searchableText.includes(search.toLowerCase()) &&
+      (!status || p.status === status) &&
+      (!payment || p.paymentStatus === payment)
+    );
+  });
+
+  /*
+   * ----------------------------------------------------------
+   * DATE FORMAT
+   * ----------------------------------------------------------
+   */
   const formatDate = (date) => {
-    if (!date) return "—";
+    if (!date) {
+      return "—";
+    }
 
     return new Date(date).toLocaleDateString("en-US", {
       month: "long",
@@ -59,6 +104,11 @@ export default function ProjectTable({
     });
   };
 
+  /*
+   * ----------------------------------------------------------
+   * TABLE COLUMNS
+   * ----------------------------------------------------------
+   */
   const columns = [
     {
       title: "DATE",
@@ -72,6 +122,7 @@ export default function ProjectTable({
         </span>
       ),
     },
+
     {
       title: "CLIENT",
       dataIndex: "clientName",
@@ -81,15 +132,18 @@ export default function ProjectTable({
         </Tooltip>
       ),
     },
+
     {
       title: "PROJECT",
       dataIndex: "projectType",
       render: (type) => <span className="muted-cell">{type}</span>,
     },
+
     {
       title: "PACKAGE",
       dataIndex: "packageName",
     },
+
     {
       title: "LOCATION",
       dataIndex: "location",
@@ -99,11 +153,13 @@ export default function ProjectTable({
         </Tooltip>
       ),
     },
+
     {
       title: "STATUS",
       dataIndex: "status",
       render: (value) => <Tag color={statusColors[value]}>{value}</Tag>,
     },
+
     {
       title: "PAYMENT",
       dataIndex: "paymentStatus",
@@ -114,10 +170,12 @@ export default function ProjectTable({
         </span>
       ),
     },
+
     {
       title: "",
       key: "actions",
       align: "right",
+
       render: (_, record) => (
         <Dropdown
           menu={{
@@ -130,15 +188,18 @@ export default function ProjectTable({
                   setViewingProject(record);
                 },
               },
+
               {
                 key: "edit",
                 icon: <EditOutlined />,
                 label: "Edit",
                 onClick: () => onEdit(record),
               },
+
               {
                 type: "divider",
               },
+
               {
                 key: "delete",
                 danger: true,
@@ -161,6 +222,7 @@ export default function ProjectTable({
         <div className="section-heading">
           <div>
             <h2>Projects</h2>
+
             <span>{filtered.length} productions in your workspace</span>
           </div>
 
@@ -209,7 +271,10 @@ export default function ProjectTable({
         />
       </div>
 
-      {/* PROJECT DETAILS MODAL */}
+      {/* =====================================================
+          EXISTING PROJECT DETAILS MODAL
+          ===================================================== */}
+
       <Modal
         title="Project Details"
         open={Boolean(viewingProject)}
@@ -218,6 +283,7 @@ export default function ProjectTable({
           <Button key="close" onClick={() => setViewingProject(null)}>
             Close
           </Button>,
+
           <Button
             key="edit"
             type="primary"

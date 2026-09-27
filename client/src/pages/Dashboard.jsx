@@ -17,22 +17,57 @@ import { serviceService } from "../services/serviceService";
 import { LoadingState, ErrorState } from "../components/common/States";
 import { message } from "antd";
 import { reportService } from "../services/reportService";
+
 export default function Dashboard() {
+  /*
+   * ----------------------------------------------------------
+   * DATA
+   * ----------------------------------------------------------
+   */
   const [projects, setProjects] = useState([]);
   const [clients, setClients] = useState([]);
   const [packages, setPackages] = useState([]);
   const [services, setServices] = useState([]);
+
+  /*
+   * ----------------------------------------------------------
+   * UI STATE
+   * ----------------------------------------------------------
+   */
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState(null);
+
   const [entity, setEntity] = useState(null);
+
   const [reportOpen, setReportOpen] = useState(false);
   const [report, setReport] = useState(null);
+
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState();
   const [payment, setPayment] = useState();
+
   const [saving, setSaving] = useState(false);
+
+  /*
+   * ----------------------------------------------------------
+   * HEADER → PROJECT TABLE
+   * ----------------------------------------------------------
+   *
+   * Header search places the selected project here.
+   *
+   * ProjectTable receives this project and opens its existing
+   * Project Details modal.
+   */
+  const [selectedProject, setSelectedProject] = useState(null);
+
+  /*
+   * ----------------------------------------------------------
+   * LOAD WORKSPACE DATA
+   * ----------------------------------------------------------
+   */
   useEffect(() => {
     Promise.all([
       projectService.list(),
@@ -46,22 +81,38 @@ export default function Dashboard() {
         setPackages(pk);
         setServices(s);
       })
-      .catch(() => setError("Unable to load workspace data."))
-      .finally(() => setLoading(false));
+      .catch(() => {
+        setError("Unable to load workspace data.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
+
+  /*
+   * ----------------------------------------------------------
+   * SAVE PROJECT
+   * ----------------------------------------------------------
+   */
   const saveProject = async (values) => {
     setSaving(true);
+
     try {
       const saved = editing
         ? await projectService.update(editing.id, values)
         : await projectService.create(values);
-      if (editing)
+
+      if (editing) {
         setProjects((items) =>
           items.map((item) => (item.id === editing.id ? saved : item)),
         );
-      else setProjects((items) => [saved, ...items]);
+      } else {
+        setProjects((items) => [saved, ...items]);
+      }
+
       setFormOpen(false);
       setEditing(null);
+
       message.success(editing ? "Project updated" : "Project created");
     } catch {
       message.error("Unable to save the project. Please try again.");
@@ -69,15 +120,29 @@ export default function Dashboard() {
       setSaving(false);
     }
   };
+
+  /*
+   * ----------------------------------------------------------
+   * DELETE PROJECT
+   * ----------------------------------------------------------
+   */
   const deleteProject = async (project) => {
     try {
       await projectService.remove(project.id);
+
       setProjects((items) => items.filter((item) => item.id !== project.id));
+
       message.success("Project deleted");
     } catch {
       message.error("Unable to delete the project.");
     }
   };
+
+  /*
+   * ----------------------------------------------------------
+   * CREATE ENTITY
+   * ----------------------------------------------------------
+   */
   const addEntity = async (values) => {
     try {
       const result =
@@ -86,27 +151,58 @@ export default function Dashboard() {
           : entity === "package"
             ? await packageService.createPackage(values)
             : await serviceService.createService(values);
-      if (entity === "client") setClients((items) => [result, ...items]);
-      if (entity === "package") setPackages((items) => [result, ...items]);
-      if (entity === "service") setServices((items) => [result, ...items]);
+
+      if (entity === "client") {
+        setClients((items) => [result, ...items]);
+      }
+
+      if (entity === "package") {
+        setPackages((items) => [result, ...items]);
+      }
+
+      if (entity === "service") {
+        setServices((items) => [result, ...items]);
+      }
+
       setEntity(null);
+
       message.success(`${entity} created`);
     } catch {
       message.error(`Unable to create the ${entity}.`);
     }
   };
-  if (loading)
+
+  /*
+   * ----------------------------------------------------------
+   * LOADING STATE
+   * ----------------------------------------------------------
+   */
+  if (loading) {
     return (
-      <AppLayoutComponent setSearch={setSearch}>
+      <AppLayoutComponent setSearch={setSearch} projects={projects}>
         <LoadingState />
       </AppLayoutComponent>
     );
-  if (error)
+  }
+
+  /*
+   * ----------------------------------------------------------
+   * ERROR STATE
+   * ----------------------------------------------------------
+   */
+  if (error) {
     return (
-      <AppLayoutComponent setSearch={setSearch}>
+      <AppLayoutComponent setSearch={setSearch} projects={projects}>
         <ErrorState message={error} />
       </AppLayoutComponent>
     );
+  }
+
+  /*
+   * ----------------------------------------------------------
+   * MAIN DASHBOARD
+   * ----------------------------------------------------------
+   */
   return (
     <AppLayoutComponent
       onAddEntity={(type) =>
@@ -114,6 +210,16 @@ export default function Dashboard() {
       }
       onReport={() => setReportOpen(true)}
       setSearch={setSearch}
+      projects={projects}
+      onProjectSelect={(project) => {
+        /*
+         * Header selected a project.
+         *
+         * ProjectTable will receive this and open
+         * its existing Project Details modal.
+         */
+        setSelectedProject(project);
+      }}
     >
       <PageHeader
         onAdd={() => {
@@ -121,8 +227,11 @@ export default function Dashboard() {
           setFormOpen(true);
         }}
       />
+
       <StatCards projects={projects} />
+
       <Charts projects={projects} />
+
       <ProjectTable
         projects={projects}
         search={search}
@@ -131,12 +240,17 @@ export default function Dashboard() {
         setStatus={setStatus}
         payment={payment}
         setPayment={setPayment}
+        selectedProject={selectedProject}
+        onSelectedProjectHandled={() => {
+          setSelectedProject(null);
+        }}
         onEdit={(p) => {
           setEditing(p);
           setFormOpen(true);
         }}
         onDelete={(p) => deleteProject(p)}
       />
+
       <ProjectFormModal
         open={formOpen}
         project={editing}
@@ -150,43 +264,49 @@ export default function Dashboard() {
         onSubmit={saveProject}
         submitting={saving}
       />
+
       <EntityModal
         type={entity}
         open={Boolean(entity)}
         onCancel={() => setEntity(null)}
         onSubmit={addEntity}
       />
+
       <ReportFilterModal
         open={reportOpen}
         onCancel={() => setReportOpen(false)}
         clients={clients}
         packages={packages}
         onGenerate={async (filters) => {
-          setReportLoading(true);
           try {
             const dateRange = filters.dateRange?.map((value) =>
               value.format("YYYY-MM-DD"),
             );
+
             const projectsForReport = await reportService.getProjectReport({
               ...filters,
               dateRange,
             });
+
             setReport({
               projects: projectsForReport,
+
               period: dateRange
                 ? `${dateRange[0]} - ${dateRange[1]}`
                 : "All scheduled projects",
+
               preparedBy: "Alex Morgan",
+
               title: filters.reportType || "Production overview",
             });
+
             setReportOpen(false);
           } catch {
             message.error("Unable to generate the report.");
-          } finally {
-            setReportLoading(false);
           }
         }}
       />
+
       <ReportPreviewModal
         open={Boolean(report)}
         report={report}

@@ -5,18 +5,25 @@ import Sidebar from "./Sidebar";
 import SettingsDrawer from "./SettingsDrawer";
 import { usePreferences } from "../../hooks/usePreferences";
 import { useAuth } from "../../hooks/useAuth";
+
 const { Content } = Layout;
+
 export default function AppLayout({
   children,
   onAddEntity,
   onReport,
   setSearch,
+  projects = [],
+  onProjectSelect,
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+
   const { sidebarCollapsed, setSidebarCollapsed, compactMode } =
     usePreferences();
+
   const { logout } = useAuth();
+
   return (
     <Layout
       className={`app-layout ${compactMode ? "compact-mode" : ""}`}
@@ -32,10 +39,18 @@ export default function AppLayout({
         onSettings={() => setSettingsOpen(true)}
         onLogout={logout}
       />
+
       <Layout className="main-layout">
-        <Header onMobileMenu={() => setMobileOpen(true)} onSearch={setSearch} />
+        <Header
+          onMobileMenu={() => setMobileOpen(true)}
+          onSearch={setSearch}
+          projects={projects}
+          onProjectSelect={onProjectSelect}
+        />
+
         <Content className="app-content">{children}</Content>
       </Layout>
+
       <SettingsDrawer
         open={settingsOpen}
         onClose={() => setSettingsOpen(false)}

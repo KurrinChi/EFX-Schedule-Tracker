@@ -1,9 +1,7 @@
-import { Button, Drawer, Layout, Menu } from "antd";
+import { Drawer, Layout, Menu } from "antd";
 import {
   AppstoreOutlined,
   FileTextOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PlusOutlined,
   SettingOutlined,
   LogoutOutlined,
@@ -124,10 +122,43 @@ export default function Sidebar({
     />
   );
 
+  /*
+   * ----------------------------------------------------------
+   * SIDEBAR LOGO TOGGLE
+   * ----------------------------------------------------------
+   *
+   * The logo itself is now the sidebar collapse/expand control.
+   *
+   * Dark mode:
+   * Black SVG → inverted to white.
+   *
+   * Light mode:
+   * Original black SVG.
+   */
+  const logoToggle = (
+    <button
+      type="button"
+      className={`sidebar-logo-toggle ${
+        collapsed ? "sidebar-logo-toggle-collapsed" : ""
+      }`}
+      onClick={() => onCollapse(!collapsed)}
+      aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+      title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+    >
+      <img
+        className={`sidebar-logo ${collapsed ? "mark-logo" : "full-logo"}`}
+        src={collapsed ? brandingConfig.logoMark : brandingConfig.logo}
+        alt={brandingConfig.name}
+      />
+    </button>
+  );
+
   return (
     <>
       <Sider
-        className={`sidebar ${theme === "dark" ? "sidebar-dark" : "sidebar-light"}`}
+        className={`sidebar ${
+          theme === "dark" ? "sidebar-dark" : "sidebar-light"
+        }`}
         collapsed={collapsed}
         collapsedWidth={80}
         width={250}
@@ -138,26 +169,7 @@ export default function Sidebar({
           borderRight: "1px solid var(--border-color)",
         }}
       >
-        <div className="sidebar-head">
-          <img
-            className="sidebar-logo full-logo"
-            src={brandingConfig.logo}
-            alt={brandingConfig.name}
-          />
-
-          <img
-            className="sidebar-logo mark-logo"
-            src={brandingConfig.logoMark}
-            alt={brandingConfig.name}
-          />
-
-          <Button
-            type="text"
-            className="sidebar-collapse-button"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => onCollapse(!collapsed)}
-          />
-        </div>
+        <div className="sidebar-head">{logoToggle}</div>
 
         {menu}
 

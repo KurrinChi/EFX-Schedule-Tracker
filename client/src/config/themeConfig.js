@@ -1,77 +1,132 @@
 import { theme } from "antd";
 
 // ============================================================
-// EFX CREATIONS — COFFEE THEME
+// EFX CREATIONS — NEW COLOR PALETTE
 //
-// #131010  Espresso Black
-// #543A14  Dark Coffee
-// #F0BB78  Caramel
-// #FFF0DC  Cream
+// Black
+// #f5f3ef → #16130e
+//
+// Dim Grey
+// #f2f2f3 → #111113
+//
+// Rosy Granite
+// #f2f2f3 → #111113
+//
+// Platinum
+// #f1f1f4 → #101014
+//
+// Amber Flame
+// #fef7e6 → #231901
+// #f9b006 → Primary accent
 // ============================================================
 
 export const themeVariables = {
   dark: {
-    // Main surfaces
-    "--app-bg": "#131010",
-    "--app-panel": "#1B1612",
-    "--app-panel-elevated": "#251C14",
-    "--app-border": "#543A14",
+    // ========================================================
+    // MAIN SURFACES
+    // ========================================================
 
-    // Text
-    "--app-text": "#FFF0DC",
-    "--app-text-secondary": "#F0BB78",
-    "--app-text-muted": "#C6A77E",
+    "--app-bg": "#16130e",
+    "--app-panel": "#1f1b14",
+    "--app-panel-elevated": "#3f3727",
+    "--app-border": "#5e523b",
 
-    // Brand
-    "--app-primary": "#F0BB78",
-    "--app-primary-hover": "#FFF0DC",
+    // ========================================================
+    // TEXT
+    // ========================================================
 
-    // Layout
-    "--page-bg": "#131010",
-    "--panel-bg": "#1B1612",
-    "--sidebar-bg": "#543A14",
+    "--app-text": "#f5f3ef",
+    "--app-text-secondary": "#c4b8a1",
+    "--app-text-muted": "#9d8962",
 
-    // Borders
-    "--border-color": "#543A14",
+    // ========================================================
+    // BRAND
+    // ========================================================
 
-    // Text aliases
-    "--text-primary": "#FFF0DC",
-    "--text-secondary": "#F0BB78",
-    "--text-muted": "#C6A77E",
+    "--app-primary": "#f9b006",
+    "--app-primary-hover": "#fac038",
+
+    // ========================================================
+    // LAYOUT
+    // ========================================================
+
+    "--page-bg": "#16130e",
+    "--panel-bg": "#1f1b14",
+    "--sidebar-bg": "#1f1b14",
+
+    // ========================================================
+    // BORDERS
+    // ========================================================
+
+    "--border-color": "#5e523b",
+
+    // ========================================================
+    // TEXT ALIASES
+    // ========================================================
+
+    "--text-primary": "#f5f3ef",
+    "--text-secondary": "#c4b8a1",
+    "--text-muted": "#9d8962",
+
+    // ========================================================
+    // SHADOW
+    // ========================================================
 
     "--app-shadow": "0 12px 32px rgba(0, 0, 0, 0.45)",
   },
 
   light: {
-    // Main surfaces
-    "--app-bg": "#FFF0DC",
-    "--app-panel": "#FFFFFF",
-    "--app-panel-elevated": "#FFF8EF",
-    "--app-border": "#D8B47A",
+    // ========================================================
+    // MAIN SURFACES
+    // ========================================================
 
-    // Text
-    "--app-text": "#131010",
-    "--app-text-secondary": "#543A14",
-    "--app-text-muted": "#76572D",
+    "--app-bg": "#f5f3ef",
+    "--app-panel": "#ffffff",
+    "--app-panel-elevated": "#f2f2f3",
+    "--app-border": "#d8d0c0",
 
-    // Brand
-    "--app-primary": "#543A14",
-    "--app-primary-hover": "#F0BB78",
+    // ========================================================
+    // TEXT
+    // ========================================================
 
-    // Layout
-    "--page-bg": "#FFF0DC",
-    "--panel-bg": "#FFFFFF",
-    "--sidebar-bg": "#543A14",
+    "--app-text": "#16130e",
+    "--app-text-secondary": "#5e523b",
+    "--app-text-muted": "#7d6e4f",
 
-    // Borders
-    "--border-color": "#D8B47A",
+    // ========================================================
+    // BRAND
+    // ========================================================
 
-    // Text aliases
-    "--text-primary": "#131010",
-    "--text-secondary": "#543A14",
-    "--text-muted": "#76572D",
+    "--app-primary": "#f9b006",
+    "--app-primary-hover": "#fac038",
 
-    "--app-shadow": "0 8px 24px rgba(84, 58, 20, 0.16)",
+    // ========================================================
+    // LAYOUT
+    // ========================================================
+
+    "--page-bg": "#f5f3ef",
+    "--panel-bg": "#ffffff",
+    "--sidebar-bg": "#1f1b14",
+
+    // ========================================================
+    // BORDERS
+    // ========================================================
+
+    "--border-color": "#d8d0c0",
+
+    // ========================================================
+    // TEXT ALIASES
+    // ========================================================
+
+    "--text-primary": "#16130e",
+    "--text-secondary": "#5e523b",
+    "--text-muted": "#7d6e4f",
+
+    // ========================================================
+    // SHADOW
+    // ========================================================
+
+    "--app-shadow": "0 8px 24px rgba(22, 19, 14, 0.16)",
   },
 };
 
@@ -80,40 +135,76 @@ export const themeVariables = {
 // ============================================================
 
 export const themeConfig = {
+  // ==========================================================
+  // DARK THEME
+  // ==========================================================
+
   dark: {
     algorithm: theme.darkAlgorithm,
 
     token: {
-      colorPrimary: "#F0BB78",
-      colorPrimaryHover: "#FFF0DC",
-      colorPrimaryActive: "#D89B55",
+      // ------------------------------------------------------
+      // BRAND
+      // ------------------------------------------------------
 
-      colorBgBase: "#131010",
-      colorBgLayout: "#131010",
-      colorBgContainer: "#1B1612",
-      colorBgElevated: "#251C14",
+      colorPrimary: "#f9b006",
+      colorPrimaryHover: "#fac038",
+      colorPrimaryActive: "#c78d05",
 
-      colorText: "#FFF0DC",
-      colorTextSecondary: "#F0BB78",
-      colorTextTertiary: "#C6A77E",
-      colorTextQuaternary: "#8E7048",
+      // ------------------------------------------------------
+      // BACKGROUNDS
+      // ------------------------------------------------------
 
-      colorBorder: "#543A14",
-      colorBorderSecondary: "#3A2812",
+      colorBgBase: "#16130e",
+      colorBgLayout: "#16130e",
+      colorBgContainer: "#1f1b14",
+      colorBgElevated: "#3f3727",
 
-      colorFill: "#543A14",
-      colorFillSecondary: "#251C14",
-      colorFillTertiary: "#1B1612",
-      colorFillQuaternary: "#131010",
+      // ------------------------------------------------------
+      // TEXT
+      // ------------------------------------------------------
 
-      colorLink: "#F0BB78",
-      colorLinkHover: "#FFF0DC",
-      colorLinkActive: "#D89B55",
+      colorText: "#f5f3ef",
+      colorTextSecondary: "#c4b8a1",
+      colorTextTertiary: "#9d8962",
+      colorTextQuaternary: "#7d6e4f",
 
-      colorError: "#D66A5C",
-      colorWarning: "#F0BB78",
-      colorSuccess: "#8EAF72",
-      colorInfo: "#F0BB78",
+      // ------------------------------------------------------
+      // BORDERS
+      // ------------------------------------------------------
+
+      colorBorder: "#5e523b",
+      colorBorderSecondary: "#3f3727",
+
+      // ------------------------------------------------------
+      // FILLS
+      // ------------------------------------------------------
+
+      colorFill: "#5e523b",
+      colorFillSecondary: "#3f3727",
+      colorFillTertiary: "#1f1b14",
+      colorFillQuaternary: "#16130e",
+
+      // ------------------------------------------------------
+      // LINKS
+      // ------------------------------------------------------
+
+      colorLink: "#f9b006",
+      colorLinkHover: "#fac038",
+      colorLinkActive: "#c78d05",
+
+      // ------------------------------------------------------
+      // STATUS
+      // ------------------------------------------------------
+
+      colorError: "#d66a5c",
+      colorWarning: "#f9b006",
+      colorSuccess: "#8eaf72",
+      colorInfo: "#f9b006",
+
+      // ------------------------------------------------------
+      // GLOBAL
+      // ------------------------------------------------------
 
       borderRadius: 8,
       controlHeight: 38,
@@ -127,40 +218,76 @@ export const themeConfig = {
     },
   },
 
+  // ==========================================================
+  // LIGHT THEME
+  // ==========================================================
+
   light: {
     algorithm: theme.defaultAlgorithm,
 
     token: {
-      colorPrimary: "#543A14",
-      colorPrimaryHover: "#76572D",
-      colorPrimaryActive: "#382509",
+      // ------------------------------------------------------
+      // BRAND
+      // ------------------------------------------------------
 
-      colorBgBase: "#FFF0DC",
-      colorBgLayout: "#FFF0DC",
-      colorBgContainer: "#FFFFFF",
-      colorBgElevated: "#FFF8EF",
+      colorPrimary: "#f9b006",
+      colorPrimaryHover: "#fac038",
+      colorPrimaryActive: "#c78d05",
 
-      colorText: "#131010",
-      colorTextSecondary: "#543A14",
-      colorTextTertiary: "#76572D",
-      colorTextQuaternary: "#9A7A4C",
+      // ------------------------------------------------------
+      // BACKGROUNDS
+      // ------------------------------------------------------
 
-      colorBorder: "#D8B47A",
-      colorBorderSecondary: "#E9D0A9",
+      colorBgBase: "#f5f3ef",
+      colorBgLayout: "#f5f3ef",
+      colorBgContainer: "#ffffff",
+      colorBgElevated: "#f2f2f3",
 
-      colorFill: "#F0BB78",
-      colorFillSecondary: "#FFF8EF",
-      colorFillTertiary: "#FFF0DC",
-      colorFillQuaternary: "#F0BB78",
+      // ------------------------------------------------------
+      // TEXT
+      // ------------------------------------------------------
 
-      colorLink: "#543A14",
-      colorLinkHover: "#76572D",
-      colorLinkActive: "#382509",
+      colorText: "#16130e",
+      colorTextSecondary: "#5e523b",
+      colorTextTertiary: "#7d6e4f",
+      colorTextQuaternary: "#9d8962",
 
-      colorError: "#B94E42",
-      colorWarning: "#A96D25",
-      colorSuccess: "#5F7E4F",
-      colorInfo: "#543A14",
+      // ------------------------------------------------------
+      // BORDERS
+      // ------------------------------------------------------
+
+      colorBorder: "#d8d0c0",
+      colorBorderSecondary: "#e4e4e7",
+
+      // ------------------------------------------------------
+      // FILLS
+      // ------------------------------------------------------
+
+      colorFill: "#fcdf9c",
+      colorFillSecondary: "#f2f2f3",
+      colorFillTertiary: "#f5f3ef",
+      colorFillQuaternary: "#fef7e6",
+
+      // ------------------------------------------------------
+      // LINKS
+      // ------------------------------------------------------
+
+      colorLink: "#c78d05",
+      colorLinkHover: "#956a04",
+      colorLinkActive: "#634603",
+
+      // ------------------------------------------------------
+      // STATUS
+      // ------------------------------------------------------
+
+      colorError: "#b94e42",
+      colorWarning: "#c78d05",
+      colorSuccess: "#5f7e4f",
+      colorInfo: "#c78d05",
+
+      // ------------------------------------------------------
+      // GLOBAL
+      // ------------------------------------------------------
 
       borderRadius: 8,
       controlHeight: 38,
@@ -170,7 +297,7 @@ export const themeConfig = {
 
       lineWidth: 1,
 
-      boxShadow: "0 8px 24px rgba(84, 58, 20, 0.16)",
+      boxShadow: "0 8px 24px rgba(22, 19, 14, 0.16)",
     },
   },
 };
@@ -183,20 +310,45 @@ export const themeComponentTokens = (themeName) => {
   const dark = themeName === "dark";
 
   const c = {
-    background: dark ? "#131010" : "#FFF0DC",
-    panel: dark ? "#1B1612" : "#FFFFFF",
-    elevated: dark ? "#251C14" : "#FFF8EF",
+    // ========================================================
+    // BASE COLORS
+    // ========================================================
 
-    text: dark ? "#FFF0DC" : "#131010",
-    secondary: dark ? "#F0BB78" : "#543A14",
-    muted: dark ? "#C6A77E" : "#76572D",
+    background: dark ? "#16130e" : "#f5f3ef",
 
-    border: dark ? "#543A14" : "#D8B47A",
+    panel: dark ? "#1f1b14" : "#ffffff",
 
-    primary: dark ? "#F0BB78" : "#543A14",
-    primaryHover: dark ? "#FFF0DC" : "#F0BB78",
+    elevated: dark ? "#3f3727" : "#f2f2f3",
 
-    selected: dark ? "#543A14" : "#F0BB78",
+    // ========================================================
+    // TEXT
+    // ========================================================
+
+    text: dark ? "#f5f3ef" : "#16130e",
+
+    secondary: dark ? "#c4b8a1" : "#5e523b",
+
+    muted: dark ? "#9d8962" : "#7d6e4f",
+
+    // ========================================================
+    // BORDER
+    // ========================================================
+
+    border: dark ? "#5e523b" : "#d8d0c0",
+
+    // ========================================================
+    // BRAND
+    // ========================================================
+
+    primary: "#f9b006",
+
+    primaryHover: "#fac038",
+
+    // ========================================================
+    // SELECTED
+    // ========================================================
+
+    selected: dark ? "#5e523b" : "#fcdf9c",
   };
 
   return {
@@ -205,11 +357,14 @@ export const themeComponentTokens = (themeName) => {
     // ========================================================
 
     Layout: {
-      headerBg: dark ? "#1B1612" : "#FFFFFF",
-      siderBg: "#543A14",
+      headerBg: dark ? "#1f1b14" : "#ffffff",
+
+      siderBg: dark ? "#1f1b14" : "#1f1b14",
+
       bodyBg: c.background,
 
       headerHeight: 82,
+
       headerPadding: "0 36px",
     },
 
@@ -220,19 +375,21 @@ export const themeComponentTokens = (themeName) => {
     Menu: {
       itemBg: "transparent",
 
-      itemColor: "#FFF0DC",
+      itemColor: "#f5f3ef",
 
-      itemHoverColor: "#131010",
-      itemHoverBg: "#F0BB78",
+      itemHoverColor: "#16130e",
 
-      itemSelectedColor: "#131010",
-      itemSelectedBg: "#F0BB78",
+      itemHoverBg: "#fac038",
 
-      itemActiveBg: "#F0BB78",
+      itemSelectedColor: "#16130e",
+
+      itemSelectedBg: "#f9b006",
+
+      itemActiveBg: "#f9b006",
 
       subMenuItemBg: "transparent",
 
-      groupTitleColor: "#F0BB78",
+      groupTitleColor: "#f9b006",
     },
 
     // ========================================================
@@ -241,6 +398,7 @@ export const themeComponentTokens = (themeName) => {
 
     Card: {
       colorBgContainer: c.panel,
+
       colorBorderSecondary: c.border,
 
       borderRadiusLG: 8,
@@ -252,9 +410,10 @@ export const themeComponentTokens = (themeName) => {
 
     Table: {
       headerBg: c.elevated,
+
       headerColor: c.text,
 
-      rowHoverBg: dark ? "#2D2116" : "#FFF3E4",
+      rowHoverBg: dark ? "#2e271c" : "#fef7e6",
 
       borderColor: c.border,
 
@@ -267,23 +426,33 @@ export const themeComponentTokens = (themeName) => {
 
     Input: {
       colorBgContainer: c.panel,
+
       colorBorder: c.border,
 
       colorText: c.text,
+
       colorTextPlaceholder: c.muted,
 
       activeBorderColor: c.primary,
+
       hoverBorderColor: c.primary,
     },
 
+    // ========================================================
+    // INPUT NUMBER
+    // ========================================================
+
     InputNumber: {
       colorBgContainer: c.panel,
+
       colorBorder: c.border,
 
       colorText: c.text,
+
       colorTextPlaceholder: c.muted,
 
       activeBorderColor: c.primary,
+
       hoverBorderColor: c.primary,
     },
 
@@ -293,11 +462,13 @@ export const themeComponentTokens = (themeName) => {
 
     Select: {
       colorBgContainer: c.panel,
+
       colorBorder: c.border,
 
       colorText: c.text,
 
       optionSelectedBg: c.selected,
+
       optionActiveBg: c.elevated,
     },
 
@@ -309,16 +480,21 @@ export const themeComponentTokens = (themeName) => {
       primaryShadow: "none",
 
       colorPrimary: c.primary,
+
       colorPrimaryHover: c.primaryHover,
 
-      colorPrimaryActive: dark ? "#D89B55" : "#382509",
+      colorPrimaryActive: dark ? "#c78d05" : "#c78d05",
 
       defaultBg: c.panel,
+
       defaultColor: c.text,
+
       defaultBorderColor: c.border,
 
       defaultHoverBg: c.elevated,
+
       defaultHoverColor: c.text,
+
       defaultHoverBorderColor: c.primary,
     },
 
@@ -328,11 +504,13 @@ export const themeComponentTokens = (themeName) => {
 
     Modal: {
       contentBg: c.panel,
+
       headerBg: c.panel,
 
       titleColor: c.text,
 
       colorIcon: c.secondary,
+
       colorIconHover: c.text,
     },
 
@@ -342,6 +520,7 @@ export const themeComponentTokens = (themeName) => {
 
     Drawer: {
       colorBgElevated: c.panel,
+
       colorText: c.text,
     },
 
@@ -361,6 +540,7 @@ export const themeComponentTokens = (themeName) => {
 
     Form: {
       labelColor: c.secondary,
+
       labelFontSize: 12,
     },
 
@@ -370,9 +550,11 @@ export const themeComponentTokens = (themeName) => {
 
     Typography: {
       colorText: c.text,
+
       colorTextSecondary: c.secondary,
 
       colorLink: c.primary,
+
       colorLinkHover: c.primaryHover,
     },
 
@@ -382,6 +564,7 @@ export const themeComponentTokens = (themeName) => {
 
     Tag: {
       defaultBg: c.elevated,
+
       defaultColor: c.secondary,
     },
 
@@ -391,6 +574,7 @@ export const themeComponentTokens = (themeName) => {
 
     Switch: {
       colorPrimary: c.primary,
+
       colorPrimaryHover: c.primaryHover,
     },
 
@@ -402,6 +586,7 @@ export const themeComponentTokens = (themeName) => {
       itemColor: c.muted,
 
       itemHoverColor: c.primary,
+
       itemSelectedColor: c.primary,
 
       inkBarColor: c.primary,
@@ -413,8 +598,11 @@ export const themeComponentTokens = (themeName) => {
 
     Pagination: {
       itemActiveBg: c.primary,
+
       itemBg: c.panel,
+
       itemLinkBg: c.panel,
+
       itemColor: c.secondary,
     },
 
@@ -424,14 +612,17 @@ export const themeComponentTokens = (themeName) => {
 
     DatePicker: {
       colorBgContainer: c.panel,
+
       colorBgElevated: c.elevated,
 
       colorBorder: c.border,
 
       colorText: c.text,
+
       colorTextPlaceholder: c.muted,
 
       activeBorderColor: c.primary,
+
       hoverBorderColor: c.primary,
     },
 
@@ -441,146 +632,18 @@ export const themeComponentTokens = (themeName) => {
 
     Calendar: {
       colorBgContainer: c.panel,
+
       colorBgElevated: c.elevated,
 
       colorText: c.text,
+
       colorTextHeading: c.text,
+
       colorTextDescription: c.secondary,
 
       colorBorder: c.border,
 
       itemActiveBg: c.primary,
-    },
-
-    // ========================================================
-    // TOOLTIP
-    // ========================================================
-
-    Tooltip: {
-      colorBgSpotlight: "#543A14",
-      colorTextLightSolid: "#FFF0DC",
-    },
-
-    // ========================================================
-    // POPOVER
-    // ========================================================
-
-    Popover: {
-      colorBgElevated: c.elevated,
-    },
-
-    // ========================================================
-    // MESSAGE
-    // ========================================================
-
-    Message: {
-      contentBg: c.panel,
-      colorText: c.text,
-    },
-
-    // ========================================================
-    // NOTIFICATION
-    // ========================================================
-
-    Notification: {
-      colorBgElevated: c.panel,
-      colorText: c.text,
-    },
-
-    // ========================================================
-    // ALERT
-    // ========================================================
-
-    Alert: {
-      colorInfoBg: c.elevated,
-      colorInfoBorder: c.border,
-
-      colorText: c.text,
-      colorTextHeading: c.text,
-    },
-
-    // ========================================================
-    // PROGRESS
-    // ========================================================
-
-    Progress: {
-      defaultColor: c.primary,
-    },
-
-    // ========================================================
-    // SPIN
-    // ========================================================
-
-    Spin: {
-      colorPrimary: c.primary,
-    },
-
-    // ========================================================
-    // SKELETON
-    // ========================================================
-
-    Skeleton: {
-      gradientFromColor: c.elevated,
-      gradientToColor: c.panel,
-    },
-
-    // ========================================================
-    // AVATAR
-    // ========================================================
-
-    Avatar: {
-      colorBgContainer: c.primary,
-      colorTextPlaceholder: dark ? "#131010" : "#FFF0DC",
-    },
-
-    // ========================================================
-    // BADGE
-    // ========================================================
-
-    Badge: {
-      colorBgContainer: c.panel,
-    },
-
-    // ========================================================
-    // STEPS
-    // ========================================================
-
-    Steps: {
-      colorPrimary: c.primary,
-
-      colorText: c.text,
-      colorTextDescription: c.secondary,
-
-      colorBorder: c.border,
-    },
-
-    // ========================================================
-    // SEGMENTED
-    // ========================================================
-
-    Segmented: {
-      itemColor: c.secondary,
-
-      itemHoverColor: c.text,
-
-      itemSelectedColor: dark ? "#131010" : "#FFF0DC",
-
-      itemSelectedBg: c.primary,
-
-      trackBg: c.elevated,
-    },
-
-    // ========================================================
-    // BREADCRUMB
-    // ========================================================
-
-    Breadcrumb: {
-      itemColor: c.muted,
-
-      lastItemColor: c.text,
-
-      linkColor: c.secondary,
-      linkHoverColor: c.primary,
     },
   };
 };
