@@ -102,10 +102,9 @@ export default function Login() {
             Don't have an account? <Link to="/register">Create an account</Link>
           </p>
           <div className="mock-note">
-            DEVELOPMENT-ONLY MOCK AUTHENTICATION
+            SECURE SIGN-IN
             <br />
-            <strong>admin@efxcreations.test</strong> /{" "}
-            <strong>Admin123!</strong>
+            Use your EFX workspace credentials.
           </div>
         </div>
       </section>

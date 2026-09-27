@@ -1,40 +1,67 @@
 import api from "./api";
-import { apiConfig } from "../config/apiConfig";
-import { mockDatabase } from "../mocks/mockDatabase";
 
-const SESSION_KEY = "efx_session";
+const AUTH_TOKEN_KEY = "efx_auth_token";
+const CURRENT_USER_KEY = "efx_current_user";
 
-const delay = (value) =>
-  new Promise((resolve) => setTimeout(() => resolve(value), 450));
+const getApiError = (error) => {
+  const responseData = error.response?.data;
+  const validationErrors = responseData?.errors
+    ? Object.values(responseData.errors).join(" ")
+    : "";
+  const message = validationErrors || responseData?.message || error.message;
+
+  return new Error(message || "Authentication request failed.");
+};
 
 export const authService = {
   async login({ identifier, password }) {
-    if (!apiConfig.useMockApi)
-      return (await api.post("/auth/login", { identifier, password })).data;
-    const valid =
-      (identifier === "admin@efxcreations.test" || identifier === "admin") &&
-      password === "Admin123!";
-    if (!valid)
-      throw new Error(
-        "Unable to sign in. Please check your credentials and try again.",
-      );
-    const user = mockDatabase.users[0];
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(user));
-    return delay(user);
+    try {
+      const response = await api.post("/auth/login", { identifier, password });
+      const { token, user } = response.data;
+
+      if (token) {
+        sessionStorage.setItem(AUTH_TOKEN_KEY, token);
+      }
+
+      if (user) {
+        sessionStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+      }
+
+      return user;
+    } catch (error) {
+      throw getApiError(error);
+    }
   },
+
   async register(values) {
-    if (!apiConfig.useMockApi)
-      return (await api.post("/auth/register", values)).data;
-    return delay({ ...values, id: `usr-${Date.now()}`, role: "Staff" });
+    try {
+      const response = await api.post("/auth/register", values);
+      return response.data;
+    } catch (error) {
+      throw getApiError(error);
+    }
   },
+
   async me() {
-    if (!apiConfig.useMockApi) return (await api.get("/auth/me")).data;
-    const session = sessionStorage.getItem(SESSION_KEY);
-    return delay(session ? JSON.parse(session) : null);
+    const response = await api.get("/auth/me");
+    const user = response.data?.user ?? response.data;
+
+    if (user) {
+      sessionStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+    }
+
+    return user;
   },
+
   async logout() {
-    if (!apiConfig.useMockApi) await api.post("/auth/logout");
-    sessionStorage.removeItem(SESSION_KEY);
-    return delay(true);
+    try {
+      await api.post("/auth/logout");
+    } catch (error) {
+      // Ignore backend logout failures; local session cleanup should still happen.
+    }
+
+    sessionStorage.removeItem(AUTH_TOKEN_KEY);
+    sessionStorage.removeItem(CURRENT_USER_KEY);
+    return true;
   },
 };

@@ -821,3 +821,344 @@
     border-color: #d1d5db !important;
   }
 }
+
+/* ============================================================
+   EFX COFFEE SIDEBAR
+   ============================================================ */
+
+.sidebar {
+  background: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--border-color);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.sidebar .ant-layout-sider-children {
+  background: var(--sidebar-bg) !important;
+}
+
+/* ============================================================
+   SIDEBAR HEADER
+   ============================================================ */
+
+.sidebar-head {
+  background: var(--sidebar-bg);
+  border-bottom: 1px solid var(--border-color);
+
+  min-height: 82px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.sidebar-head .sidebar-collapse-button {
+  margin-left: auto;
+
+  color: var(--app-text) !important;
+
+  background: transparent !important;
+
+  border: 0;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sidebar-head .sidebar-collapse-button:hover {
+  color: var(--app-primary) !important;
+  background: rgba(240, 187, 120, 0.12) !important;
+}
+
+/* ============================================================
+   LOGOS
+   ============================================================ */
+
+.sidebar-logo {
+  max-height: 48px;
+  object-fit: contain;
+}
+
+.full-logo {
+  max-width: 150px;
+}
+
+.mark-logo {
+  display: none;
+}
+
+.sidebar.ant-layout-sider-collapsed .full-logo {
+  display: none;
+}
+
+.sidebar.ant-layout-sider-collapsed .mark-logo {
+  display: block;
+  max-width: 42px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   MENU
+   ============================================================ */
+
+.efx-sidebar-menu {
+  background: transparent !important;
+  border-inline-end: 0 !important;
+  padding: 18px 12px;
+}
+
+/* Normal menu items */
+
+.efx-sidebar-menu .ant-menu-item {
+  color: #fff0dc !important;
+
+  border-radius: 10px;
+
+  margin: 4px 0;
+
+  width: 100%;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+/* Menu icons */
+
+.efx-sidebar-menu .ant-menu-item .ant-menu-item-icon,
+.efx-sidebar-menu .ant-menu-submenu-title .ant-menu-item-icon {
+  color: #f0bb78 !important;
+}
+
+/* Hover */
+
+.efx-sidebar-menu .ant-menu-item:hover {
+  color: #fff0dc !important;
+
+  background: rgba(240, 187, 120, 0.14) !important;
+}
+
+.efx-sidebar-menu .ant-menu-item:hover .ant-menu-item-icon {
+  color: #f0bb78 !important;
+}
+
+/* Selected */
+
+.efx-sidebar-menu .ant-menu-item-selected {
+  color: #131010 !important;
+
+  background: #f0bb78 !important;
+
+  font-weight: 700;
+}
+
+.efx-sidebar-menu .ant-menu-item-selected .ant-menu-item-icon {
+  color: #131010 !important;
+}
+
+/* ============================================================
+   MENU GROUP LABELS
+   ============================================================ */
+
+.efx-sidebar-menu .ant-menu-item-group-title {
+  color: #f0bb78 !important;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  padding-left: 18px;
+  padding-right: 18px;
+
+  margin-top: 20px;
+}
+
+/* ============================================================
+   SUBMENU
+   ============================================================ */
+
+.efx-sidebar-menu .ant-menu-submenu-title {
+  color: #fff0dc !important;
+
+  border-radius: 10px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.efx-sidebar-menu .ant-menu-submenu-title:hover {
+  color: #fff0dc !important;
+
+  background: rgba(240, 187, 120, 0.14) !important;
+}
+
+.efx-sidebar-menu .ant-menu-submenu-title .ant-menu-submenu-arrow {
+  color: #f0bb78 !important;
+}
+
+/* Nested menu */
+
+.efx-sidebar-menu .ant-menu-sub {
+  background: transparent !important;
+}
+
+.efx-sidebar-menu .ant-menu-sub .ant-menu-item {
+  color: #f0bb78 !important;
+}
+
+.efx-sidebar-menu .ant-menu-sub .ant-menu-item:hover {
+  color: #fff0dc !important;
+  background: rgba(240, 187, 120, 0.12) !important;
+}
+
+/* ============================================================
+   SYSTEM STATUS
+   ============================================================ */
+
+.system-status {
+  margin: 18px 16px 16px;
+
+  padding: 16px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  background: rgba(240, 187, 120, 0.08);
+
+  border: 1px solid rgba(240, 187, 120, 0.25);
+
+  border-radius: 10px;
+
+  color: var(--app-text);
+}
+
+.system-status strong {
+  display: block;
+
+  color: #fff0dc;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.system-status small {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #f0bb78;
+
+  font-size: 11px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 auto;
+
+  margin-top: 4px;
+
+  border-radius: 50%;
+
+  background: #8eaf72;
+
+  box-shadow: 0 0 0 3px rgba(142, 175, 114, 0.12);
+}
+
+/* ============================================================
+   COLLAPSED SIDEBAR
+   ============================================================ */
+
+.sidebar.ant-layout-sider-collapsed .sidebar-head {
+  padding: 0 14px;
+}
+
+.sidebar.ant-layout-sider-collapsed .efx-sidebar-menu {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sidebar.ant-layout-sider-collapsed
+  .efx-sidebar-menu
+  .ant-menu-item-group-title {
+  display: none;
+}
+
+.sidebar.ant-layout-sider-collapsed .system-status {
+  margin-left: 12px;
+  margin-right: 12px;
+
+  padding: 12px;
+
+  justify-content: center;
+}
+
+.sidebar.ant-layout-sider-collapsed .system-status > div {
+  display: none;
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+
+.mobile-drawer .ant-drawer-content {
+  background: var(--sidebar-bg) !important;
+}
+
+.mobile-drawer .ant-drawer-body {
+  background: var(--sidebar-bg) !important;
+  padding: 0 !important;
+}
+
+.mobile-drawer .drawer-menu {
+  min-height: 100%;
+  background: var(--sidebar-bg);
+}
+
+.mobile-drawer .efx-sidebar-menu {
+  padding-top: 20px;
+}
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+
+:root[data-theme="light"] .efx-sidebar-menu .ant-menu-item {
+  color: #fff0dc !important;
+}
+
+:root[data-theme="light"] .efx-sidebar-menu .ant-menu-submenu-title {
+  color: #fff0dc !important;
+}
+
+:root[data-theme="light"] .sidebar-head .sidebar-collapse-button {
+  color: #fff0dc !important;
+}
+
+/* ============================================================
+   THEME TRANSITION
+   ============================================================ */
+
+.sidebar,
+.sidebar-head,
+.efx-sidebar-menu,
+.mobile-drawer,
+.mobile-drawer .ant-drawer-content,
+.mobile-drawer .ant-drawer-body,
+.system-status {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}

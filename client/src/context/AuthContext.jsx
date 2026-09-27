@@ -8,10 +8,19 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const token = sessionStorage.getItem("efx_auth_token");
+
+    if (!token) {
+      setLoading(false);
+      return undefined;
+    }
+
     authService
       .me()
-      .then(setUser)
+      .then((nextUser) => setUser(nextUser))
+      .catch(() => setUser(null))
       .finally(() => setLoading(false));
+
     const onExpired = () => setUser(null);
     window.addEventListener("efx:session-expired", onExpired);
     return () => window.removeEventListener("efx:session-expired", onExpired);
@@ -22,11 +31,16 @@ export function AuthProvider({ children }) {
     setUser(nextUser);
     return nextUser;
   };
+
   const logout = async () => {
     await authService.logout();
     setUser(null);
   };
-  const register = (values) => authService.register(values);
+
+  const register = async (values) => {
+    const result = await authService.register(values);
+    return result;
+  };
 
   return (
     <AuthContext.Provider

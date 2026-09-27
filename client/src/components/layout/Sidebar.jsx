@@ -26,92 +26,117 @@ export default function Sidebar({
 }) {
   const navigate = useNavigate();
   const { theme } = usePreferences();
+
+  const menuItems = [
+    {
+      key: "dashboard",
+      icon: <AppstoreOutlined />,
+      label: "Dashboard",
+      onClick: () => navigate("/dashboard"),
+    },
+
+    {
+      type: "group",
+      label: "MANAGE",
+      children: [
+        {
+          key: "add",
+          icon: <PlusOutlined />,
+          label: "Add Entity",
+          children: [
+            {
+              key: "client",
+              label: "Client",
+              onClick: () => onAddEntity("client"),
+            },
+            {
+              key: "package",
+              label: "Package",
+              onClick: () => onAddEntity("package"),
+            },
+            {
+              key: "service",
+              label: "Service",
+              onClick: () => onAddEntity("service"),
+            },
+            {
+              key: "project",
+              label: "Project",
+              onClick: () => onAddEntity("project"),
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      type: "group",
+      label: "REPORTS",
+      children: [
+        {
+          key: "reports",
+          icon: <FileTextOutlined />,
+          label: "Generate report",
+          onClick: onReport,
+        },
+      ],
+    },
+
+    {
+      type: "group",
+      label: "SYSTEM",
+      children: [
+        {
+          key: "settings",
+          icon: <SettingOutlined />,
+          label: "Settings",
+          onClick: onSettings,
+        },
+        {
+          key: "logout",
+          icon: <LogoutOutlined />,
+          label: "Logout",
+          onClick: onLogout,
+        },
+      ],
+    },
+  ];
+
+  /*
+   * IMPORTANT:
+   *
+   * Do NOT use:
+   *
+   *   theme={theme}
+   *
+   * on Menu.
+   *
+   * ConfigProvider + themeComponentTokens() is responsible
+   * for the application's theme.
+   */
+
   const menu = (
     <Menu
-      theme={theme}
       mode="inline"
       selectedKeys={["dashboard"]}
-      items={[
-        {
-          key: "dashboard",
-          icon: <AppstoreOutlined />,
-          label: "Dashboard",
-          onClick: () => navigate("/dashboard"),
-        },
-        {
-          type: "group",
-          label: "MANAGE",
-          children: [
-            {
-              key: "add",
-              icon: <PlusOutlined />,
-              label: "Add Entity",
-              children: [
-                {
-                  key: "client",
-                  label: "Client",
-                  onClick: () => onAddEntity("client"),
-                },
-                {
-                  key: "package",
-                  label: "Package",
-                  onClick: () => onAddEntity("package"),
-                },
-                {
-                  key: "service",
-                  label: "Service",
-                  onClick: () => onAddEntity("service"),
-                },
-                {
-                  key: "project",
-                  label: "Project",
-                  onClick: () => onAddEntity("project"),
-                },
-              ],
-            },
-          ],
-        },
-        {
-          type: "group",
-          label: "REPORTS",
-          children: [
-            {
-              key: "reports",
-              icon: <FileTextOutlined />,
-              label: "Generate report",
-              onClick: onReport,
-            },
-          ],
-        },
-        {
-          type: "group",
-          label: "SYSTEM",
-          children: [
-            {
-              key: "settings",
-              icon: <SettingOutlined />,
-              label: "Settings",
-              onClick: onSettings,
-            },
-            {
-              key: "logout",
-              icon: <LogoutOutlined />,
-              label: "Logout",
-              onClick: onLogout,
-            },
-          ],
-        },
-      ]}
+      items={menuItems}
+      className="efx-sidebar-menu"
     />
   );
+
   return (
     <>
       <Sider
-        className="sidebar"
+        className={`sidebar ${theme === "dark" ? "sidebar-dark" : "sidebar-light"}`}
         collapsed={collapsed}
         collapsedWidth={80}
         width={250}
         trigger={null}
+        theme={theme === "dark" ? "dark" : "light"}
+        style={{
+          background: "var(--sidebar-bg)",
+          borderRight: "1px solid var(--border-color)",
+        }}
       >
         <div className="sidebar-head">
           <img
@@ -119,35 +144,64 @@ export default function Sidebar({
             src={brandingConfig.logo}
             alt={brandingConfig.name}
           />
+
           <img
             className="sidebar-logo mark-logo"
             src={brandingConfig.logoMark}
             alt={brandingConfig.name}
           />
+
           <Button
             type="text"
+            className="sidebar-collapse-button"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => onCollapse(!collapsed)}
           />
         </div>
+
         {menu}
+
         <div className="system-status">
           <span className="status-dot" />
+
           <div>
             <strong>System status</strong>
             <small>All systems operational</small>
           </div>
         </div>
       </Sider>
+
       <Drawer
         placement="left"
         open={mobileOpen}
         onClose={onMobileClose}
         size="default"
-        className="mobile-drawer"
+        className={`mobile-drawer ${
+          theme === "dark" ? "mobile-drawer-dark" : "mobile-drawer-light"
+        }`}
         closable={false}
+        styles={{
+          body: {
+            padding: 0,
+            background: "var(--sidebar-bg)",
+          },
+          header: {
+            background: "var(--sidebar-bg)",
+          },
+        }}
       >
-        <div className="drawer-menu">{menu}</div>
+        <div className="drawer-menu">
+          {menu}
+
+          <div className="system-status">
+            <span className="status-dot" />
+
+            <div>
+              <strong>System status</strong>
+              <small>All systems operational</small>
+            </div>
+          </div>
+        </div>
       </Drawer>
     </>
   );
