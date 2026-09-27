@@ -7,3 +7,4 @@ logs
 *.log
 client/node_modules
 client/dist
+Instructions.txt
